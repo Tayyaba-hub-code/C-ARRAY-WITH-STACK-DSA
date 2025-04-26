@@ -1,0 +1,85 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Twostack{
+private:
+	int *arr;
+	int capacity;
+	int top1;
+	int top2;
+public:
+	Twostack(int size){
+		capacity = size;
+		top1 = -1;
+		top2 = capacity;
+		arr = new int[capacity];
+
+	}
+	void push1(int value1){
+		if (top1 + 1 == top2){
+			cout << "Stack overflow" << endl;
+		}
+		else{
+			arr[++top1] = value1;
+		}
+
+	}
+	int pop1(){
+		if (top1 == -1){
+			cout << "stack underflow" << endl;
+		}
+		else{
+			return arr[top1--];
+		}
+	}
+	int peek1(){
+		if (top1 != -1){
+			return arr[top1];
+		}
+	}
+	void push2(int value2){
+		if (top2 - 1 == top1){
+			cout << "stack2 overflow" << endl;
+		}
+		else{
+			arr[--top2] = value2;
+		}
+	}
+	int pop2(){
+		if (top2 == capacity){
+			cout << "stack2 underflowed" << endl;
+		}
+		else{
+			return arr[top2++];
+		}
+
+	}
+	int peek2(){
+		if (top2 != capacity){
+			return arr[top2];
+		}
+	}
+	void display1(){
+		cout << "values pushed into first stack are: ";
+		for (int i = 0; i <= top1; i++){
+			cout << arr[i] << " ";
+		}
+	}
+	void display2(){
+		cout << "values pushed into stack 2 are: ";
+		for (int i = top2; i < capacity; i++){
+			cout << arr[i] << " ";
+		}
+	}
+};
+int main(){
+	Twostack s(5);
+	s.push1(10);
+	s.push1(20);
+	s.push2(40);
+	s.push2(30);
+	s.display1();
+	s.display2();
+	system("pause");
+	return 0;
+}
